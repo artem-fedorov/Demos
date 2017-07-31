@@ -1,0 +1,25 @@
+---
+execution:
+- concurrency: 20
+  hold-for: 60s
+  scenario: BlazeDemo
+
+scenarios:
+  BlazeDemo:
+    retrieve-resources: false
+    requests:
+    - url: http://blazedemo.com
+      label: GET Home
+      assert:
+      - contains:
+        - Welcome
+    - url: http://blazedemo.com/reserve.php
+      label: POST reserve
+      method: POST
+      body:
+        fromPort: Paris
+        toPort: Rome
+      assert:
+      - contains:
+        - from Paris to Rome
+
